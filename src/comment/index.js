@@ -6,7 +6,7 @@ import buildMakeComment from './comment'
 import buildMakeSource from './source'
 
 const makeSource = buildMakeSource({isValidIp})
-const makeComment = buildMakeSource({Id, md5, sanitize, makeSource })
+const makeComment = buildMakeComment({Id, md5, sanitize, makeSource })
 
 export default makeComment
 
