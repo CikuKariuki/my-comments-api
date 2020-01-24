@@ -22,5 +22,6 @@ const commentService = Object.freeze({
     listComments,
     removeComment
 })
+//export all the needed dependencies then export them again one by one for convenience and when you need to use one or two.
 export default commentService
 export { addComment, editComment, listComments, removeComment}
