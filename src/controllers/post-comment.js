@@ -3,7 +3,35 @@ export default function makePostComment ({addComment}){
     return async function postComment (httpRequest){
         try{
         const {source = {}, ...commentInfo } = httpRequest.body
-        source.ip = httpRequest.ipsource.browser = httpRequest.headers [ 'User-Agent']
-        } catch (e){}
+        source.ip = httpRequest.ip
+        source.browser = httpRequest.headers [ 'User-Agent']
+        if(httpsRequest.headers['Referer']) {
+            source.referer = httpRequest.headers['Referer']
+        }
+        //use add comment use case to add a new comment. If there is an error, log an error.
+        const posted = await addComment ({
+            ...commentInfo,
+            source
+        })
+        return {
+            headers: {
+                'Content-Type': 'application/json',
+                'Last-Modified': new Date(posted.modifiedOn)
+            },
+            statusCode: 201,
+            body: { posted }
+        }
+        } catch (e){
+            console.log(e)
+            return {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                statusCode: 400,
+                body: {
+                    error: e.message
+                }
+            }
+        }
     }
 }
