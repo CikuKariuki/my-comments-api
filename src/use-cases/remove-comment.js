@@ -23,7 +23,7 @@ export default function makeRemoveComment ({ commentsDb }) {
         return hardDelete(commentToDelete)
     }
 
-    //creating the functions referred above, hasreplies, isOnlyReplyOfDeletedParent, deleteNothing, softDelete, .
+    //creating the functions referred above, hasreplies, isOnlyReplyOfDeletedParent, deleteNothing, softDelete, deleteCommentAndParent, hardDelete.
     async function hasReplies({id: commentId }) {
         const replies = await commentsDb.findReplies ({
             commentId,
@@ -67,6 +67,7 @@ export default function makeRemoveComment ({ commentsDb }) {
             softDelete: true,
             message: "Comment has replies. Soft deleted."
         }
+    }
         async function deleteCommentAndParent(comment){
             await Promise.all([
                 commenstsDb.remove(comment),
@@ -87,4 +88,3 @@ export default function makeRemoveComment ({ commentsDb }) {
             }
         }
     }
-}
