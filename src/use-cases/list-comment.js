@@ -1,6 +1,6 @@
 // injects the commentsdb as a dependency
 export default function makeListComments ({ commentsDb }) {
-    // calls/gets the m using the id
+    // calls/gets the comment using the id
     return async function listComments ({ postId } = {}) {
         if (!postId) {
             throw new Error("You must have a post id.")
