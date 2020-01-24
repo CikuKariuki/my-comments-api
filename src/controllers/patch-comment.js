@@ -1,6 +1,7 @@
 //inject dependency instead of importing
 export default function makePatchComment ({ editComment }) {
     return async function patchComment (httpRequest ){
+        //update through editComment and if error, log error
         try{ 
             const {source = {}, ...commentInfo} = httpRequest.body
             source.ip = httpRequest.ip
